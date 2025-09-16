@@ -1,0 +1,18 @@
+.custom-voucher-btn-safe {
+    margin-left: 8px;
+    padding: 3px 7px;
+    border: 1px solid #d0011b;
+    border-radius: 4px;
+    color: #d0011b !important;
+    font-size: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: transparent;
+    transition: background-color 0.2s;
+    display: inline-block;
+}
+
+.custom-voucher-btn-safe:hover {
+    background-color: rgba(208, 1, 27, 0.1);
+    color: #d0011b !important;
+}
