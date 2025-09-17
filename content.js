@@ -29,7 +29,7 @@
     }
 
     function checkVoucherStatus(cardElement) {
-        const statusSpans = cardElement.querySelectorAll('.lvIwMO div span, .z0Xxct span, .WHIV6W span, .F2MklE, .vqJoas');
+        const statusSpans = cardElement.querySelectorAll('.lvIwMO div span, .z0Xxct span, .WHIV6W span, .F2MklE, .vqJoas, .OPj1Ym span');
         let statusText = '';
         statusSpans.forEach(span => {
             if(span.textContent) {
@@ -77,6 +77,16 @@
             }
         }
 
+    // 再次判斷
+    if (!statusText) {
+        const allText = cardElement.textContent;
+        if (allText.includes('領取')) {
+            statusText = '領取';
+        } else if (allText.includes('兌換完畢') || allText.includes('已兌換') || allText.includes('已領取') || allText.includes('已使用')) {
+            statusText = '已兌換完畢';
+        }
+    }
+
         return statusText;
     }
 
@@ -111,7 +121,7 @@
     }
 
     function addCustomButtons() {
-        const allCards = document.querySelectorAll('.Ozujd4, .TVjANi, ._hsjbR.n8iYL8, .BBE8vQ, .Hvy133, .EHXP6I.eYf2xv.yymuwL');
+        const allCards = document.querySelectorAll('.Ozujd4, .TVjANi, ._hsjbR.n8iYL8, .BBE8vQ, .Hvy133, .EHXP6I.eYf2xv.yymuwL, .kxI6jR [data-testid="vcCard"]');
         allCards.forEach(card => {
             const link = card.querySelector('a[href*="/voucher/details"], a[href*="evcode="], a[href*="promotionId="]');
             if (!link) return;
