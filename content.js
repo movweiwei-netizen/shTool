@@ -34,7 +34,11 @@
         statusSpans.forEach(span => {
             if(span.textContent) {
                 const text = span.textContent.trim();
-                if (text === '領取' || text === '兌換完畢' || text === '已兌換完畢' || text === '已領取' || text === '已使用') {
+				if (text === '領取') {
+                    statusText = '領取';
+				} else if (text === '去逛逛') {
+					statusText = '去逛逛';
+				} else if (text === '兌換完畢' || text === '已兌換完畢' || text === '已領取' || text === '已使用') {
                     statusText = text;
                 }
             }
@@ -80,8 +84,10 @@
     // 再次判斷
     if (!statusText) {
         const allText = cardElement.textContent;
-        if (allText.includes('領取')) {
+        if (allText.includes('領取') && !allText.includes('去逛逛')) {
             statusText = '領取';
+		} else if (allText.includes('去逛逛')) {
+			statusText = '去逛逛';
         } else if (allText.includes('兌換完畢') || allText.includes('已兌換') || allText.includes('已領取') || allText.includes('已使用')) {
             statusText = '已兌換完畢';
         }
@@ -95,16 +101,23 @@
         newBtn.textContent = '查詢可用商品';
         newBtn.href = '#';
         newBtn.className = 'custom-voucher-btn-safe';
+
         newBtn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
 
-            const statusText = checkVoucherStatus(cardElement);
+            const currentButton = cardElement.querySelector('.OPj1Ym span');
+            let currentStatus = '';
+            if (currentButton) {
+            currentStatus = currentButton.textContent.trim();
+            }
 
-            if (statusText === '領取') {
+            if (currentStatus === '領取') {
                 showAlert('提醒', '請先 領取優惠券 再查詢可用商品', 'warning');
                 return;
             }
+    
+            const statusText = checkVoucherStatus(cardElement);
             if (statusText === '兌換完畢' || statusText === '已兌換完畢' || statusText === '已領取' || statusText === '已使用') {
                 showAlert('錯誤', '此優惠券 已兌換完畢 或 已使用', 'error');
                 return;
@@ -117,6 +130,7 @@
                 showAlert('錯誤', '無法解析折扣碼網址', 'error');
             }
         });
+		
         return newBtn;
     }
 
