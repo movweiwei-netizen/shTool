@@ -5,8 +5,7 @@
   "description": "快速查看優惠券可用商品，不用再猜哪些商品能折扣，省時又方便｜支援優惠卷頁面、活動領券中心、商城券/店家券。",
   "author": "movwei",
   "permissions": [
-    "activeTab",
-    "storage"
+    "activeTab"
   ],
   "host_permissions": [
     "https://shopee.tw/*"
@@ -30,11 +29,11 @@
     "default_popup": "popup.html",
     "default_title": "優惠券查詢助手",
     "default_icon": {
-      "128": "./icon128.png"
+      "128": "icons/icon128.png"
     }
   },
   "icons": {
-    "128": "./icon128.png"
+    "128": "icons/icon128.png"
   },
   "web_accessible_resources": [
     {
